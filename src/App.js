@@ -4,8 +4,16 @@ import { BrowserRouter as Router, Routes, Route, Navigate, useLocation } from 'r
 import Home from './pages/Home'
 import Navigation from './components/Navigation'
 import Authenticate from './pages/Authenticate'
+import Activate from './pages/Activate'
+import Rooms from './pages/Rooms'
+
+//USER HAS FILLED PHONE NUMBER AND OTP
 let isAuth = true
 
+//USER HAS FILLED FULL NAME AND PROFILE PICTURE
+const user = {
+    activated: true
+}
 
 const App = () => {
     return (
@@ -23,17 +31,57 @@ const App = () => {
                             <Authenticate />
                         </GuestRoute>
                     } />
+                    <Route path='/activate' element={
+                        <SemiProtected>
+                            <Activate />
+                        </SemiProtected>
+                    } />
+                    <Route path='/rooms' element={
+                        <ProtectedRoute>
+                            <Rooms />
+                        </ProtectedRoute>
+                    } />
                 </Routes>
             </Router>
         </>
     )
 }
 
+// USER HAS NOT FILLED ANYTHING
 const GuestRoute = ({ children }) => {
     const location = useLocation()
 
     if (isAuth) {
         return <Navigate to='/rooms' state={{ from: location }} />
+    }
+
+    return { children }
+}
+
+// USER HAS ONLY FILLED PHONE NUMBER AND OTP
+const SemiProtected = ({ children }) => {
+    const location = useLocation()
+
+    if (!isAuth) {
+        return <Navigate to='/' state={location} />
+    }
+    else if (isAuth && !user.activated) {
+        return { children }
+    }
+
+    return <Navigate to='/rooms' state={location} />
+
+}
+
+//USER HAS FILLED FULL NAME AND PROFILE PICTURE
+const ProtectedRoute = ({ children }) => {
+    const location = useLocation();
+
+    if (!isAuth) {
+        return <Navigate to='/' state={location} />
+    }
+    else if (isAuth && !user.activated) {
+        return <Navigate to='/activate' state={location} />
     }
 
     return { children }
