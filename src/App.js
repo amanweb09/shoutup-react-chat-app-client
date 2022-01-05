@@ -1,10 +1,11 @@
 import React from 'react'
 import './App.css'
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
+import { BrowserRouter as Router, Routes, Route, Navigate, useLocation } from 'react-router-dom'
 import Home from './pages/Home'
 import Navigation from './components/Navigation'
-import Register from './pages/Register'
-import Login from './pages/Login'
+import Authenticate from './pages/Authenticate'
+let isAuth = true
+
 
 const App = () => {
     return (
@@ -12,13 +13,30 @@ const App = () => {
             <Router>
                 <Navigation />
                 <Routes>
-                    <Route exact path='/' element={<Home />} />
-                    <Route path='/register' element={<Register />} />
-                    <Route path='/login' element={<Login />} />
+                    <Route exact path='/' element={
+                        <GuestRoute>
+                            <Home />
+                        </GuestRoute>
+                    } />
+                    <Route path="/authenticate" element={
+                        <GuestRoute>
+                            <Authenticate />
+                        </GuestRoute>
+                    } />
                 </Routes>
             </Router>
         </>
     )
+}
+
+const GuestRoute = ({ children }) => {
+    const location = useLocation()
+
+    if (isAuth) {
+        return <Navigate to='/rooms' state={{ from: location }} />
+    }
+
+    return { children }
 }
 
 export default App
