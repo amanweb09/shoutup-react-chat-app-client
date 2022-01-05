@@ -1,0 +1,21 @@
+.card-wrapper {
+    margin-top: 2rem;
+    flex-direction: column;
+}
+.button-wrapper {
+    margin-left: 12rem;
+    margin-bottom: 1.25rem;
+    align-items: center;
+    justify-content: center;
+}
+.button-wrapper > button {
+    margin: 0 0.5rem;
+    width: 4rem;
+    height: 4rem;
+    background: #262626;
+    border-radius: 10px;
+    cursor: pointer;
+}
+.active {
+    background: #0063d4;
+}

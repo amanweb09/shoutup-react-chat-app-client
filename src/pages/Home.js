@@ -8,7 +8,7 @@ const Home = () => {
 
     const navigate = useNavigate();
     const onClick = () => {
-        navigate('/register')
+        navigate('/authenticate')
     }
 
     return (
@@ -23,13 +23,12 @@ const Home = () => {
                 </p>
 
                 <Button
-                    text='Get your username'
+                    text="Let's go"
                     onClick={onClick}
                 />
 
                 <div className='signin-wrapper'>
                     <span>Have an invitation text?</span>
-                    <NavLink to='/login'>Sign in</NavLink>
                 </div>
             </Card>
         </div>
