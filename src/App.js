@@ -8,11 +8,11 @@ import Activate from './pages/Activate'
 import Rooms from './pages/Rooms'
 
 //USER HAS FILLED PHONE NUMBER AND OTP
-let isAuth = true
+let isAuth = false
 
 //USER HAS FILLED FULL NAME AND PROFILE PICTURE
 const user = {
-    activated: true
+    activated: false
 }
 
 const App = () => {
@@ -55,7 +55,7 @@ const GuestRoute = ({ children }) => {
         return <Navigate to='/rooms' state={{ from: location }} />
     }
 
-    return { children }
+    return children 
 }
 
 // USER HAS ONLY FILLED PHONE NUMBER AND OTP
@@ -63,10 +63,10 @@ const SemiProtected = ({ children }) => {
     const location = useLocation()
 
     if (!isAuth) {
-        return <Navigate to='/' state={location} />
+        return <Navigate to='/' state={location} replace/>
     }
     else if (isAuth && !user.activated) {
-        return { children }
+        return  children
     }
 
     return <Navigate to='/rooms' state={location} />
@@ -84,7 +84,7 @@ const ProtectedRoute = ({ children }) => {
         return <Navigate to='/activate' state={location} />
     }
 
-    return { children }
+    return children 
 }
 
 export default App
