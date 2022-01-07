@@ -19,15 +19,15 @@ const PhoneEmail = ({ onNext }) => {
                     <div className="button-wrapper flex">
                         {
                             type === 'phone' ?
-                                <button style={{ background: '#0063d4' }} onClick={() => { setType('phone') }}><i class="fas fa-mobile-alt"></i></button>
+                                <button style={{ background: '#0063d4' }} onClick={() => { setType('phone') }}><i className="fas fa-mobile-alt"></i></button>
                                 :
-                                <button onClick={() => { setType('phone') }}><i class="fas fa-mobile-alt"></i></button>
+                                <button onClick={() => { setType('phone') }}><i className="fas fa-mobile-alt"></i></button>
                         }
                         {
                             type === 'email' ?
-                                <button style={{ background: '#0063d4' }} onClick={() => { setType('email') }}><i class="fas fa-envelope"></i></button>
+                                <button style={{ background: '#0063d4' }} onClick={() => { setType('email') }}><i className="fas fa-envelope"></i></button>
                                 :
-                                <button onClick={() => { setType('email') }}><i class="fas fa-envelope"></i></button>
+                                <button onClick={() => { setType('email') }}><i className="fas fa-envelope"></i></button>
                         }
                     </div>
                 </div>
