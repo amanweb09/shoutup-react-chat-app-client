@@ -5,6 +5,7 @@ import { useSelector, useDispatch } from 'react-redux'
 import '../css/Avatar.css'
 import { setAvatar } from '../store/activateSlice'
 import { activate } from '../http'
+import { setAuth } from '../store/authSlice'
 
 const Avatar = ({ onNext }) => {
     const dispatch = useDispatch();
@@ -12,15 +13,18 @@ const Avatar = ({ onNext }) => {
     const [image, setImage] = useState('https://cdn-icons.flaticon.com/png/512/2931/premium/2931495.png?token=exp=1641568260~hmac=22ed707ff9f4bbce8d3c14756eb2ac25')
     const { name, avatar } = useSelector((state) => state.activate);
 
-    const success = () => {
-        
+    const success = (res) => {
+        if (res.data.auth) {
+            dispatch(setAuth(res.data))
+        }
     }
-    const failure = () => {
+    const failure = (err) => {
+        console.log(err);
 
     }
-    async function submit() { 
+    async function submit() {
         try {
-            await activate({name, avatar}, success, failure)
+            await activate({ name, avatar }, success, failure)
         } catch (error) {
             console.log(error);
         }
