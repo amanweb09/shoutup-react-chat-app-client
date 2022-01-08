@@ -21,5 +21,11 @@ export const verifyOtp = (data, success, failure) => {
         .catch((err) => { failure(err) })
 }
 
+export const activate = (data, success, failure) => {
+    api.post('/activate', data)
+        .then((res) => { success(res) })
+        .catch((err) => { failure(err) })
+}
+
 
 export default api;
