@@ -14,7 +14,7 @@ export const authSlice = createSlice({
     initialState,
     reducers: {
         setAuth: (state, action) => {
-            const { user } = action.payload;
+            const { user } = action.payload;   //jab is reducer ko import kr k call krenge aur usme data pass krenge, toh voh data payload main store hojaega
             state.user = user;
             state.isAuth = true
         },
