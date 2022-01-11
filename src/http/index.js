@@ -28,4 +28,33 @@ export const activate = (data, success, failure) => {
 }
 
 
+//interceptors  (type of middlewares between req and res)
+api
+    .interceptors
+    .response
+    .use(
+        (config) => {
+            return config;      //if response status is 2xx i.e. sucesss
+        },
+        async (err) => {        //if response status is failure
+            const originalRequest = err.config;
+
+            if (err.response.status === 401 && originalRequest && !originalRequest.isRetry) {
+                originalRequest.isRetry = true;
+
+                try {
+                    await axios.get(`${process.env.REACT_APP_API_URL}/refresh`, {
+                        withCredentials: true
+                    })
+
+                    return api.request(originalRequest)
+                } catch (error) {
+                    console.log(error.message);
+                }
+            }
+
+            throw err;
+        })
+
+
 export default api;
