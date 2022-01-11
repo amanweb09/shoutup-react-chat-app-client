@@ -16,7 +16,13 @@ export const authSlice = createSlice({
         setAuth: (state, action) => {
             const { user } = action.payload;   //jab is reducer ko import kr k call krenge aur usme data pass krenge, toh voh data payload main store hojaega
             state.user = user;
-            state.isAuth = true
+
+            if (user === null) {
+                state.isAuth = false
+            }
+            else {
+                state.isAuth = true
+            }
         },
         setOtp: (state, action) => {
             const { phone, hash } = action.payload;

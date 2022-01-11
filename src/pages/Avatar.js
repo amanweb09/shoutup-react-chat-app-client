@@ -6,28 +6,32 @@ import '../css/Avatar.css'
 import { setAvatar } from '../store/activateSlice'
 import { activate } from '../http'
 import { setAuth } from '../store/authSlice'
+import Loader from '../components/Loader'
 
 const Avatar = ({ onNext }) => {
     const dispatch = useDispatch();
 
     const [image, setImage] = useState('https://cdn-icons.flaticon.com/png/512/2931/premium/2931495.png?token=exp=1641568260~hmac=22ed707ff9f4bbce8d3c14756eb2ac25')
     const { name, avatar } = useSelector((state) => state.activate);
+    const [loading, setLoading] = useState(false);
 
     const success = (res) => {
         if (res.data.auth) {
             dispatch(setAuth(res.data))
+            setLoading(false)
         }
     }
     const failure = (err) => {
         console.log(err);
-
+        setLoading(false)
     }
     async function submit() {
-        try {
-            await activate({ name, avatar }, success, failure)
-        } catch (error) {
-            console.log(error);
+        if (!name || !avatar) {
+            return;
         }
+        
+        setLoading(true)
+        activate({ name, avatar }, success, failure)
     }
 
     function captureImage(e) {
@@ -42,8 +46,13 @@ const Avatar = ({ onNext }) => {
         }
     }
 
+    if (loading) {
+        return <Loader message='Activation in Progress...' />
+    }
+    
     return (
         <>
+        
             <Card
                 title={`Okay, ${name}!`}
                 icon='https://cdn-icons.flaticon.com/png/512/2931/premium/2931508.png?token=exp=1641567252~hmac=c583fe2f675817fab57ee8dc12ee706f' >

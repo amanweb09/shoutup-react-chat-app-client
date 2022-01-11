@@ -26,6 +26,11 @@ export const activate = (data, success, failure) => {
         .then((res) => { success(res) })
         .catch((err) => { failure(err) })
 }
+export const logout = (data, success, failure) => {
+    api.post('/logout', data)
+        .then((res) => { success(res) })
+        .catch((err) => { failure(err) })
+}
 
 
 //interceptors  (type of middlewares between req and res)

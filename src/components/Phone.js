@@ -24,7 +24,11 @@ const Phone = ({ onNext }) => {
 
     }
     async function submit() {
-        await sendOtp({ phone }, success, failure)
+        if (!phone) {
+            return
+        }
+        
+        sendOtp({ phone }, success, failure)
     }
 
     return (

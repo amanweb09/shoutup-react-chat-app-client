@@ -23,12 +23,13 @@ const OTP = ({ onNext }) => {
         console.log(err);
     }
 
-    async function submit() {
-        try {
-            await verifyOtp({ otp: OTP, phone, hash }, success, failure)
-        } catch (error) {
-            console.log(error);
+    function submit() {
+        if (!OTP ||!phone || !hash) {
+            return;
         }
+
+        verifyOtp({ otp: OTP, phone, hash }, success, failure)
+
     }
     return (
         <>

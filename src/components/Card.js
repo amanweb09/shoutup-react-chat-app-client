@@ -6,8 +6,9 @@ const Card = ({ title, icon, children }) => {
 
         <div className="card">
             <div className="heading-wrapper flex-center">
-                <img src={icon} alt="" />
-                <h1>{title}</h1>
+                {icon && <img src={icon} alt="" />}     {/* short form for if else */}
+                {title && <h1>{title}</h1>}     {/* short form for if else */}
+
             </div>
 
             {children}
