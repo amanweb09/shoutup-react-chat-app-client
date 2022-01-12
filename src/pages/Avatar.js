@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import Card from '../components/Card'
 import Button from '../components/Button'
 import { useSelector, useDispatch } from 'react-redux'
@@ -14,11 +14,15 @@ const Avatar = ({ onNext }) => {
     const [image, setImage] = useState('https://cdn-icons.flaticon.com/png/512/2931/premium/2931495.png?token=exp=1641568260~hmac=22ed707ff9f4bbce8d3c14756eb2ac25')
     const { name, avatar } = useSelector((state) => state.activate);
     const [loading, setLoading] = useState(false);
+    const [unMounted, setUnMounted] = useState(false);
 
     const success = (res) => {
         if (res.data.auth) {
-            dispatch(setAuth(res.data))
-            setLoading(false)
+
+            if (!unMounted) {
+                dispatch(setAuth(res.data))
+            }
+            setLoading(false);
         }
     }
     const failure = (err) => {
@@ -33,6 +37,12 @@ const Avatar = ({ onNext }) => {
         setLoading(true)
         activate({ name, avatar }, success, failure)
     }
+
+    useEffect(() => {
+        return () => {      //cleanup function i.e this will run when the component is destroyed or unmounted
+            setUnMounted(true)
+        }
+    })
 
     function captureImage(e) {
         const file = e.target.files[0]
