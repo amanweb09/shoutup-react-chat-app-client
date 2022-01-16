@@ -8,12 +8,11 @@ const TextInput = (props) => {
                     background: '#525252', 
                     border: 'none',
                     padding: '10px 20px',
-                    width: '300px',
                     color: '#fff',
                     fontSize: '18px',
                     borderRadius: '10px',
                     outline: 'none',
-                    width: props.fullWidth === 'true' ? '100%' : 'inherit'
+                    width: props.fullwidth === 'true' ? '100%' : '300px'
                 }}
                 type="text"
                 {...props}

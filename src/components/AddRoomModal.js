@@ -1,18 +1,31 @@
 import React, { useState } from 'react'
 import '../css/AddRoomModal.css'
 import TextInput from './TextInput'
+import { createRoom as create } from '../http'
 
 const AddRoomModal = ({ onClose }) => {
 
     const [roomType, setRoomType] = useState('open');
     const [topic, setTopic] = useState('');
 
+    function success(res) {
+        console.log(res);
+    }
+    function failure(err) {
+        console.log(err);
+    }
+    function createRoom() {
+        if (!topic) return;
+
+        create({ topic, roomType }, success, failure)
+    }
+
     return (
         <div className='modal-mask flex-center'>
             <div className="modal-body">
                 <div className="modal-header">
                     <h3>Enter the topic to be discussed</h3>
-                    <TextInput fullWidth="true" value={topic} onChange={(e) => { setTopic(e.target.value) }} />
+                    <TextInput fullwidth="true" value={topic} onChange={(e) => { setTopic(e.target.value) }} />
 
                     <h4>Room Types</h4>
                     <div className="room-types">
@@ -62,7 +75,9 @@ const AddRoomModal = ({ onClose }) => {
                 </div>
                 <div className="modal-footer">
                     <h4>Start a room, open to everyone</h4>
-                    <button>Let's Go</button>
+                    <button
+                        onClick={createRoom}
+                    >Let's Go</button>
                 </div>
 
                 <span

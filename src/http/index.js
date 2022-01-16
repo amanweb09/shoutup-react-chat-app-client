@@ -31,6 +31,11 @@ export const logout = (data, success, failure) => {
         .then((res) => { success(res) })
         .catch((err) => { failure(err) })
 }
+export const createRoom = (data, success, failure) => {
+    api.post('/rooms', data)
+        .then((res) => { success(res) })
+        .catch((err) => { failure(err) })
+}
 
 
 //interceptors  (type of middlewares between req and res)
