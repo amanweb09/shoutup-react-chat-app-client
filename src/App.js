@@ -9,6 +9,7 @@ import Rooms from './pages/Rooms'
 import { useSelector } from 'react-redux'
 import { useLoadingWithRefresh } from './hooks/useLoadingWithRefresh'
 import Loader from './components/Loader'
+import Room from './pages/Room'
 
 const App = () => {
 
@@ -37,6 +38,11 @@ const App = () => {
                     <Route path='/rooms' element={
                         <ProtectedRoute>
                             <Rooms />
+                        </ProtectedRoute>
+                    } />
+                    <Route path='/room/:id' element={
+                        <ProtectedRoute>
+                            <Room />
                         </ProtectedRoute>
                     } />
                 </Routes>

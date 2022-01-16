@@ -2,14 +2,17 @@ import React, { useState } from 'react'
 import '../css/AddRoomModal.css'
 import TextInput from './TextInput'
 import { createRoom as create } from '../http'
+import { useNavigate } from 'react-router-dom'
 
 const AddRoomModal = ({ onClose }) => {
 
     const [roomType, setRoomType] = useState('open');
     const [topic, setTopic] = useState('');
 
+    const navigate = useNavigate();
+
     function success(res) {
-        console.log(res);
+        navigate(`/rooms/${res.data.id}`)
     }
     function failure(err) {
         console.log(err);

@@ -36,6 +36,11 @@ export const createRoom = (data, success, failure) => {
         .then((res) => { success(res) })
         .catch((err) => { failure(err) })
 }
+export const getAllRooms = (success, failure) => {
+    api.get('/rooms')
+        .then((res) => { success(res) })
+        .catch((err) => { failure(err) })
+}
 
 
 //interceptors  (type of middlewares between req and res)

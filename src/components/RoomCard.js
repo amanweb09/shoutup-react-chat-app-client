@@ -23,7 +23,7 @@ const RoomCard = ({ room }) => {
 
             </div>
                 <div className="people-count">
-                    <span>{room.totalPeople}</span>
+                    <span>{room.speakers.length}</span>
                 </div>
 
         </div>
