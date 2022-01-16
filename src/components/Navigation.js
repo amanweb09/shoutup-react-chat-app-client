@@ -31,11 +31,17 @@ const Navigation = () => {
             </nav>
 
             <div className='nav-right flex-center'>
-                <h3>{user.name}</h3>
-                <NavLink to='/'>
-                    <img src={user.avatar} className='profile-pic' alt='profile picture' />
-                </NavLink>
-                <button className='logout-btn' onClick={logoutUser}>&#8594;</button>
+                {
+                    user ?
+                        <>
+                            <h3>{user.name}</h3>
+                            <NavLink to='/'>
+                                <img src={user.avatar} className='profile-pic' alt='profile picture' />
+                            </NavLink>
+                            <button className='logout-btn' onClick={logoutUser}>&#8594;</button>
+                        </>
+                        : ""
+                }
             </div>
         </div>
     )

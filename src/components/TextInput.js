@@ -12,7 +12,8 @@ const TextInput = (props) => {
                     color: '#fff',
                     fontSize: '18px',
                     borderRadius: '10px',
-                    outline: 'none'
+                    outline: 'none',
+                    width: props.fullWidth === 'true' ? '100%' : 'inherit'
                 }}
                 type="text"
                 {...props}

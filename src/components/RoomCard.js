@@ -16,7 +16,7 @@ const RoomCard = ({ room }) => {
                 <div className="names">
                     {
                         room.speakers.map((speaker) => {
-                            return <span>{speaker.name}</span>
+                            return <span key={speaker.id}>{speaker.name}</span>
                         })
                     }
                 </div>
